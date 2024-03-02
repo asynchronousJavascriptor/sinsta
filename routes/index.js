@@ -13,6 +13,35 @@ router.get("/", function (req, res) {
   res.render("index", { footer: false });
 });
 
+router.get("/story/:number", isLoggedIn, async function (req, res) {
+  const storyuser = await userModel.findOne({ username: req.session.passport.user })
+  .populate("stories")
+
+  const image = storyuser.stories[req.params.number];
+
+  if(storyuser.stories.length > req.params.number){
+    res.render("story", { footer: false, storyuser: storyuser, storyimage : image, number: req.params.number });
+  }
+  else{
+    res.redirect("/feed");
+  }
+});
+
+router.get("/story/:id/:number", isLoggedIn, async function (req, res) {
+  const storyuser = await userModel.findOne({ _id: req.params.id })
+  .populate("stories")
+
+  const image = storyuser.stories[req.params.number];
+
+  if(storyuser.stories.length > req.params.number){
+    res.render("story", { footer: false, storyuser: storyuser, storyimage : image, number: req.params.number });
+  }
+  else{
+    res.redirect("/feed");
+  }
+
+});
+
 router.get("/login", function (req, res) {
   res.render("login", { footer: false });
 });
@@ -90,7 +119,6 @@ router.post("/update", isLoggedIn, async function (req, res) {
 
 router.get("/upload", isLoggedIn, async function (req, res) {
   const user = await userModel.findOne({username: req.session.passport.user});
-
   res.render("upload", { footer: true, user });
 });
 

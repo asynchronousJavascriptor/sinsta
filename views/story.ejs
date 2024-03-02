@@ -1,0 +1,28 @@
+<% include ./partials/header.ejs %>
+    <div class="w-full h-screen bg-zinc-900">
+        <div style="background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.5), transparent);" class="w-full absolute px-5 py-3 pb-7 bg-red-500">
+            <h3 class="font-regular text-white flex"><a href="/feed"><i class="w-6 h-6 text-sm bg-white/20 mr-2 rounded-full flex items-center justify-center ri-arrow-left-line"></i></a> <%= storyuser.username %></h3>
+            <div class="progresscontainer mt-2 w-full h-1 bg-white/20">
+                <div class="progress w-0 h-full bg-white"></div>
+            </div>
+        </div>
+        <div class="picture w-full h-screen bg-zinc-800 overflow-hidden">
+            <img class="w-full h-full object-cover" src="/images/uploads/<%= storyimage.image %>" alt="">
+        </div>
+    </div>
+
+    <script>
+        var prog = document.querySelector(".progress");
+        var count = 0;
+        var int = setInterval(function(){
+            if(count < 100){
+                count++;
+                prog.style.width = `${count}%`;
+            }
+            else{
+                window.location.href = `http://localhost:3000/story/<%= storyuser._id %>/<%= Number(number)+1 %>`;
+            }
+        }, 30)
+        
+    </script>
+<% include ./partials/footer.ejs %>

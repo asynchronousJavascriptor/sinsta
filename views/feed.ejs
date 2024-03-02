@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="story px-3 flex gap-3 overflow-auto mt-5">
-      <a href="/story">
+      <a href="/story/0">
         <div class="circle flex-shrink-0">
           <div
             class="gradient w-[18vw] h-[18vw] bg-sky-100 rounded-full bg-gradient-to-r from-purple-700 to-orange-500 flex items-center justify-center">
@@ -20,7 +20,7 @@
       </a>
 
       <% stories.forEach(function(elem){ %>
-        <a href="/story">
+        <a href="/story/<%= elem.user._id %>/0">
           <div class="circle flex-shrink-0">
             <div
               class="gradient w-[18vw] h-[18vw] bg-sky-100 rounded-full bg-gradient-to-r from-purple-700 to-orange-500 flex items-center justify-center">
